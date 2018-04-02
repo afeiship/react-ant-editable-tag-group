@@ -31,6 +31,16 @@ export default class extends Component {
     };
   }
 
+  componentWillReceiveProps(inProps){
+    const { value } = inProps;
+    const { onChange } = this.props;
+    if( value !== this.state.value ){
+      this.setState({ value },()=>{
+        onChange({ target:{ value }});
+      });
+    }
+  }
+
   _onClose = (inValue) => {
     const value = this.state.value.filter(item => item !== inValue);
     const { onChange } = this.props;
