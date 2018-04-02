@@ -62,7 +62,8 @@ class App extends React.Component{
   render(){
     return (
       <div className="hello-react-ant-editable-tag-group">
-        <ReactAntEditableTagGroup value={this.state.value} onChange={this._onChange} ref='rc' />
+        <ReactAntEditableTagGroup value={this.state.value} onChange={this._onChange} ref='rc1' />
+        <ReactAntEditableTagGroup value={['tag1']} onChange={this._onChange} ref='rc2' />
       </div>
     );
   }

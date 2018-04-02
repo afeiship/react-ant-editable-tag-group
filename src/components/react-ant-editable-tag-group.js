@@ -24,8 +24,9 @@ export default class extends Component {
 
   constructor(inProps){
     super(inProps);
+    const value = inProps.value.length > 0 ? inProps.value : [];
     this.state = {
-      value: inProps.value,
+      value,
       inputVisible: false,
       inputValue: '',
     };
