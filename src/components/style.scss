@@ -1,0 +1,13 @@
+$react-ant-editable-tag-group-options:(
+
+)!default;
+
+.react-ant-editable-tag-group{
+  &-input{
+    width: 78px;
+  }
+  &-new{
+    background: #fff;
+    border-style: dashed;
+  }
+}
