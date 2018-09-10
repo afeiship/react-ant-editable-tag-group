@@ -63,7 +63,7 @@ export default class extends Component {
   _onInputConfirm = () => {
     const { inputValue, value } = this.state;
     const { onChange } = this.props;
-    (inputValue && value.indexOf(inputValue) === -1) && value.push(inputValue)
+    (inputValue && value.indexOf(inputValue) === -1) && value.push(inputValue);
     this.setState({ value, editing: false, inputValue: '', }, () => {
       onChange({ target: { value } });
     });
@@ -71,7 +71,7 @@ export default class extends Component {
 
   render() {
     const { editing, inputValue } = this.state;
-    const { className, value, newText, ...props } = this.props;
+    const { className, value, onChange, newText, ...props } = this.props;
 
     return (
       <section {...props} className={classNames('react-ant-editable-tag-group', className)}>
