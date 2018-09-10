@@ -2,11 +2,14 @@
 ul,li{list-style: none;}
 
 @import './components/style.scss';
-@import './assets/antd.min.css';
 
 .hello-react-ant-editable-tag-group{
   color:#F00;
   padding:50px 20px;
+
+  .react-ant-editable-tag-group{
+    margin-bottom: 20px;
+  }
 
   button{
     border: none;

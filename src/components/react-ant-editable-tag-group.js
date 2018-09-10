@@ -1,4 +1,4 @@
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -18,26 +18,26 @@ export default class extends Component {
   static defaultProps = {
     value: [],
     onChange: noop,
-    newText:'New Tag'
+    newText: '新增'
   };
   /*===properties end===*/
 
-  constructor(inProps){
+  constructor(inProps) {
     super(inProps);
-    const value = inProps.value.length > 0 ? inProps.value : [];
+    const { value } = inProps;
     this.state = {
       value,
-      inputVisible: false,
+      editing: false,
       inputValue: '',
     };
   }
 
-  componentWillReceiveProps(inProps){
+  componentWillReceiveProps(inProps) {
     const { value } = inProps;
     const { onChange } = this.props;
-    if( value !== this.state.value ){
-      this.setState({ value },()=>{
-        onChange({ target:{ value }});
+    if (value !== this.state.value) {
+      this.setState({ value }, () => {
+        onChange({ target: { value } });
       });
     }
   }
@@ -45,48 +45,38 @@ export default class extends Component {
   _onClose = (inValue) => {
     const value = this.state.value.filter(item => item !== inValue);
     const { onChange } = this.props;
-    this.setState({ value },()=>{
-      onChange({ target:{ value }});
+    this.setState({ value }, () => {
+      onChange({ target: { value } });
     });
   };
 
-  _onShowInput = () => {
-    this.setState({
-      inputVisible: true
-    }, () => {
+  _onEditing = () => {
+    this.setState({ editing: true }, () => {
       this.input.focus();
     });
   };
 
-  _onInputChange = (e) => {
-    this.setState({ inputValue: e.target.value });
+  _onInputChange = (inEvent) => {
+    this.setState({ inputValue: inEvent.target.value });
   };
 
   _onInputConfirm = () => {
     const { inputValue, value } = this.state;
     const { onChange } = this.props;
-    if (inputValue && value.indexOf(inputValue) === -1) {
-      value.push( inputValue );
-    }
-    this.setState({
-      value,
-      inputVisible: false,
-      inputValue: '',
-    },()=>{
-      onChange({ target:{ value }});
+    (inputValue && value.indexOf(inputValue) === -1) && value.push(inputValue)
+    this.setState({ value, editing: false, inputValue: '', }, () => {
+      onChange({ target: { value } });
     });
   };
 
-  _saveInputRef = input => this.input = input;
-
   render() {
-    const { inputVisible, inputValue } = this.state;
-    const { className, value, newText,  ...props } = this.props;
+    const { editing, inputValue } = this.state;
+    const { className, value, newText, ...props } = this.props;
 
     return (
-      <section {...props} className={classNames('react-ant-editable-tag-group',className)}>
+      <section {...props} className={classNames('react-ant-editable-tag-group', className)}>
         {
-          this.state.value.map((item, index) => {
+          this.state.value.map((item) => {
             return (
               <Tag key={item} closable afterClose={() => this._onClose(item)}>
                 {item}
@@ -96,9 +86,9 @@ export default class extends Component {
         }
 
         {
-          inputVisible && (
+          editing && (
             <Input
-              ref={this._saveInputRef}
+              ref={input => this.input = input}
               type="text"
               size="small"
               className='react-ant-editable-tag-group-input'
@@ -111,9 +101,9 @@ export default class extends Component {
         }
 
         {
-          !inputVisible && (
+          !editing && (
             <Tag
-              onClick={this._onShowInput}
+              onClick={this._onEditing}
               className='react-ant-editable-tag-group-new'>
               <Icon type="plus" /> {newText}
             </Tag>
