@@ -1,72 +1,54 @@
 # react-ant-editable-tag-group
 > Editable tag group for ant.
 
-## properties:
-```javascript
-
-  static propTypes = {
-    className: PropTypes.string,
-    newText: PropTypes.string,
-    value: PropTypes.array,
-    onChange: PropTypes.func,
-  };
-
-  static defaultProps = {
-    value: [],
-    onChange: noop,
-    newText:'New Tag'
-  };
-  
+## installation
+```shell
+npm install -S @feizheng/react-ant-editable-tag-group
 ```
 
-## install && import:
-```bash
-npm install --save afeiship/react-ant-editable-tag-group --registry=https://registry.npm.taobao.org
+## update
+```shell
+npm update @feizheng/react-ant-editable-tag-group
 ```
 
-```js
-import ReactAntEditableTagGroup from 'react-ant-editable-tag-group';
-```
-
-```scss
-// customize your styles:
-$react-ant-editable-tag-group-options:(
-);
-
-@import 'node_modules/react-ant-editable-tag-group/dist/style.scss';
-```
+## properties
+| Name      | Type   | Default | Description                           |
+| --------- | ------ | ------- | ------------------------------------- |
+| className | string | -       | The extended className for component. |
+| value     | array  | []      | Default value.                        |
+| onChange  | func   | noop    | The change handler.                   |
+| newText   | string | '新增'  | The new text.                         |
 
 
-## usage:
-```jsx
+## usage
+1. import css
+  ```scss
+  @import "~@feizheng/react-ant-editable-tag-group/dist/style.scss";
 
-// install: npm install afeiship/react-ant-editable-tag-group --save
-// import : import ReactAntEditableTagGroup from 'react-ant-editable-tag-group'
+  // customize your styles:
+  $react-ant-editable-tag-group-options: ()
+  ```
+2. import js
+  ```js
+  import ReactAntEditableTagGroup from '@feizheng/react-ant-editable-tag-group';
+  import ReactDOM from 'react-dom';
+  import React from 'react';
+  import './assets/style.scss';
 
-class App extends React.Component{
-  state = {
-    value:['tag1','tag2']
-  };
-
-  constructor(props){
-    super(props);
-    window.demo = this;
-    window.refs = this.refs;
-    window.rc = this.refs.rc;
+  class App extends React.Component {
+    componentDidMount() {}
+    render() {
+      return (
+        <div className="app-container">
+          <ReactAntEditableTagGroup />
+        </div>
+      );
+    }
   }
 
-  _onChange = e =>{
-    console.log(e.target.value);
-  };
+  ReactDOM.render(<App />, document.getElementById('app'));
 
-  render(){
-    return (
-      <div className="hello-react-ant-editable-tag-group">
-        <ReactAntEditableTagGroup value={this.state.value} onChange={this._onChange} ref='rc1' />
-        <ReactAntEditableTagGroup value={['tag1']} onChange={this._onChange} ref='rc2' />
-      </div>
-    );
-  }
-}
+  ```
 
-```
+## documentation
+- https://afeiship.github.io/react-ant-editable-tag-group/

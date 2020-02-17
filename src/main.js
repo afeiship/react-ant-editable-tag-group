@@ -1,2 +1,2 @@
-import ReactAntEditableTagGroup from 'components/react-ant-editable-tag-group';
+import ReactAntEditableTagGroup from './components';
 export default ReactAntEditableTagGroup;
