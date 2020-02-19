@@ -39,7 +39,7 @@ export default class ReactAntEditableTagGroup extends Component {
     super(inProps);
     const { value } = inProps;
     this.state = {
-      value,
+      value: value || [],
       editing: false,
       inputValue: ''
     };
