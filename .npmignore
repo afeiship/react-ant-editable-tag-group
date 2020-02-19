@@ -9,6 +9,7 @@ Rakefile
 **/npm-debug.log
 **/node_modules
 
+bin
 src
 docs
 build
@@ -26,5 +27,6 @@ __test__
 __tests__
 jest.config.js
 jest.setup.js
+jsconfig.json
 
 
