@@ -15,7 +15,7 @@ npm update @feizheng/react-ant-editable-tag-group
 | Name      | Type   | Default | Description                           |
 | --------- | ------ | ------- | ------------------------------------- |
 | className | string | -       | The extended className for component. |
-| value     | array  | -       | Default value.                        |
+| value     | array  | []      | Default value.                        |
 | onChange  | func   | noop    | The change handler.                   |
 | newText   | string | '新增'  | The new text.                         |
 

@@ -31,6 +31,7 @@ export default class ReactAntEditableTagGroup extends Component {
   };
 
   static defaultProps = {
+    value: [],
     onChange: noop,
     newText: '新增'
   };
@@ -39,7 +40,7 @@ export default class ReactAntEditableTagGroup extends Component {
     super(inProps);
     const { value } = inProps;
     this.state = {
-      value: value || [],
+      value,
       editing: false,
       inputValue: ''
     };
