@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <ReactAntEditableTagGroup
-          items={items}
+          value={items}
           onChange={(e) => {
             console.log(e.target.value.join('|'));
           }}

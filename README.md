@@ -17,7 +17,6 @@ npm update @feizheng/react-ant-editable-tag-group
 | className | string | -       | The extended className for component. |
 | value     | array  | []      | Default value.                        |
 | onChange  | func   | noop    | The change handler.                   |
-| newText   | string | '新增'  | The new text.                         |
 
 
 ## usage
@@ -36,11 +35,19 @@ npm update @feizheng/react-ant-editable-tag-group
   import './assets/style.scss';
 
   class App extends React.Component {
-    componentDidMount() {}
+    state = {
+      items: ['tag1', 'tag2', 'tag3']
+    };
     render() {
+      const { items } = this.state;
       return (
         <div className="app-container">
-          <ReactAntEditableTagGroup />
+          <ReactAntEditableTagGroup
+            value={items}
+            onChange={(e) => {
+              console.log(e.target.value.join('|'));
+            }}
+          />
         </div>
       );
     }

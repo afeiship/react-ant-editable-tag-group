@@ -21,12 +21,14 @@ webpack.config.babel.js
 example
 examples
 
+# vscode
+jsconfig.json
+
 # tests
 test
 __test__
 __tests__
 jest.config.js
 jest.setup.js
-jsconfig.json
 
 

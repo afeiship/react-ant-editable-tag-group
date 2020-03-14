@@ -20,7 +20,7 @@ export default class ReactAntEditableTagGroup extends Component {
     /**
      * Default value.
      */
-    items: PropTypes.array,
+    value: PropTypes.array,
     /**
      * The change handler.
      */
@@ -28,20 +28,28 @@ export default class ReactAntEditableTagGroup extends Component {
   };
 
   static defaultProps = {
-    items: [],
+    value: [],
     onChange: noop
   };
 
   constructor(inProps) {
     super(inProps);
-    const { items } = inProps;
+    const { value } = inProps;
     this.state = {
-      items
+      value
     };
   }
 
+  shouldComponentUpdate(inProps) {
+    const { value } = inProps;
+    if (value !== this.state.value) {
+      this.setState({ value });
+    }
+    return true;
+  }
+
   template = ({ item, index }, cb) => {
-    const { items } = this.state;
+    const { value } = this.state;
     return (
       <Tag closable key={index} onClose={cb}>
         <Input
@@ -51,11 +59,11 @@ export default class ReactAntEditableTagGroup extends Component {
           defaultValue={item}
           className={`${CLASS_NAME}__input`}
           onBlur={(e) => {
-            items[items.length - 1] = e.nativeEvent.target.value;
-            this.setState({ items }, () => {
+            value[value.length - 1] = e.nativeEvent.target.value;
+            this.setState({ value }, () => {
               this.handleChange({
                 target: {
-                  value: items
+                  value: value
                 }
               });
             });
@@ -65,7 +73,7 @@ export default class ReactAntEditableTagGroup extends Component {
     );
   };
 
-  templateCreate = ({ items }, cb) => {
+  templateCreate = ({ value }, cb) => {
     const create = () => {
       cb();
       setTimeout(() => {
@@ -90,12 +98,12 @@ export default class ReactAntEditableTagGroup extends Component {
   };
 
   render() {
-    const { className, items, onChange, ...props } = this.props;
-    const _items = this.state.items;
+    const { className, value, onChange, ...props } = this.props;
+    const _value = this.state.value;
 
     return (
       <ReactInteractiveList
-        items={_items}
+        items={_value}
         template={this.template}
         templateCreate={this.templateCreate}
         templateDefault={this.templateDefault}
