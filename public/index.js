@@ -4,11 +4,19 @@ import React from 'react';
 import './assets/style.scss';
 
 class App extends React.Component {
-  componentDidMount() {}
+  state = {
+    items: ['tag1', 'tag2', 'tag3']
+  };
   render() {
+    const { items } = this.state;
     return (
       <div className="app-container">
-        <ReactAntEditableTagGroup />
+        <ReactAntEditableTagGroup
+          items={items}
+          onChange={(e) => {
+            console.log(e.target.value.join('|'));
+          }}
+        />
       </div>
     );
   }

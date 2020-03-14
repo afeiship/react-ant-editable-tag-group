@@ -1,11 +1,17 @@
 $react-ant-editable-tag-group-options: () !default;
 
 .react-ant-editable-tag-group {
-  &-input {
+  display: flex;
+  &__input {
     width: 78px;
+    border-color: transparent;
+    background: none;
+    text-align: center;
   }
-  &-new {
+  &__new {
     background: #fff;
     border-style: dashed;
+    display: inline-flex;
+    align-items: center;
   }
 }

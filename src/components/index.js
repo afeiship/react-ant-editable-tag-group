@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import noop from '@feizheng/noop';
 import objectAssign from 'object-assign';
 import { Tag, Icon, Input } from 'antd';
+import ReactInteractiveList from '@feizheng/react-interactive-list';
 
 const CLASS_NAME = 'react-ant-editable-tag-group';
 
@@ -19,109 +20,88 @@ export default class ReactAntEditableTagGroup extends Component {
     /**
      * Default value.
      */
-    value: PropTypes.array,
+    items: PropTypes.array,
     /**
      * The change handler.
      */
-    onChange: PropTypes.func,
-    /**
-     * The new text.
-     */
-    newText: PropTypes.string
+    onChange: PropTypes.func
   };
 
   static defaultProps = {
-    value: [],
-    onChange: noop,
-    newText: '新增'
+    items: [],
+    onChange: noop
   };
 
   constructor(inProps) {
     super(inProps);
-    const { value } = inProps;
+    const { items } = inProps;
     this.state = {
-      value,
-      editing: false,
-      inputValue: ''
+      items
     };
   }
 
-  shouldComponentUpdate(inProps) {
-    const { value } = inProps;
-    if (value !== this.state.value) {
-      this.change(value);
-    }
-    return true;
-  }
+  template = ({ item, index }, cb) => {
+    const { items } = this.state;
+    return (
+      <Tag closable key={index} onClose={cb}>
+        <Input
+          ref={(input) => (this.input = input)}
+          type="text"
+          size="small"
+          defaultValue={item}
+          className={`${CLASS_NAME}__input`}
+          onBlur={(e) => {
+            items[items.length - 1] = e.nativeEvent.target.value;
+            this.setState({ items }, () => {
+              this.handleChange({
+                target: {
+                  value: items
+                }
+              });
+            });
+          }}
+        />
+      </Tag>
+    );
+  };
 
-  change(inValue) {
+  templateCreate = ({ items }, cb) => {
+    const create = () => {
+      cb();
+      setTimeout(() => {
+        this.input.focus();
+      });
+    };
+    return (
+      <Tag onClick={create} className={`${CLASS_NAME}__new`}>
+        <Icon type="plus" />
+        新增
+      </Tag>
+    );
+  };
+
+  templateDefault = () => {
+    return '';
+  };
+
+  handleChange = (inEvent) => {
     const { onChange } = this.props;
-    const target = { value: inValue };
-    this.setState(target, () => {
-      onChange({ target });
-    });
-  }
-
-  handleClose = (inValue) => {
-    const value = this.state.value.filter((item) => item !== inValue);
-    this.change(value);
-  };
-
-  handleEditing = () => {
-    this.setState({ editing: true }, () => {
-      this.input.focus();
-    });
-  };
-
-  handleInputChange = (inEvent) => {
-    this.setState({ inputValue: inEvent.target.value });
-  };
-
-  handleInputConfirm = () => {
-    const { inputValue, value } = this.state;
-    inputValue && value.indexOf(inputValue) === -1 && value.push(inputValue);
-    this.setState({ editing: false, inputValue: '' }, () => {
-      this.change(value);
-    });
+    onChange(inEvent);
   };
 
   render() {
-    const { editing, inputValue } = this.state;
-    const { className, value, onChange, newText, ...props } = this.props;
+    const { className, items, onChange, ...props } = this.props;
+    const _items = this.state.items;
 
     return (
-      <section
-        className={classNames('react-ant-editable-tag-group', className)}
-        {...props}>
-        {this.state.value.map((item) => {
-          return (
-            <Tag key={item} closable onClose={this.handleClose}>
-              {item}
-            </Tag>
-          );
-        })}
-
-        {editing && (
-          <Input
-            ref={(input) => (this.input = input)}
-            type="text"
-            size="small"
-            className="react-ant-editable-tag-group-input"
-            value={inputValue}
-            onChange={this.handleInputChange}
-            onBlur={this.handleInputConfirm}
-            onPressEnter={this.handleInputConfirm}
-          />
-        )}
-
-        {!editing && (
-          <Tag
-            onClick={this.handleEditing}
-            className="react-ant-editable-tag-group-new">
-            <Icon type="plus" /> {newText}
-          </Tag>
-        )}
-      </section>
+      <ReactInteractiveList
+        items={_items}
+        template={this.template}
+        templateCreate={this.templateCreate}
+        templateDefault={this.templateDefault}
+        data-component={CLASS_NAME}
+        className={classNames(CLASS_NAME, className)}
+        {...props}></ReactInteractiveList>
     );
   }
 }
