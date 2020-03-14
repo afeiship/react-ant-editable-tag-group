@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from '@feizheng/noop';
 import objectAssign from 'object-assign';
-import { Tag, Icon, Input, Button } from 'antd';
+import { Tag, Badge, Icon, Input, Button } from 'antd';
 import ReactInteractiveList from '@feizheng/react-interactive-list';
+import nxUnique from '@feizheng/next-unique';
 
 const CLASS_NAME = 'react-ant-editable-tag-group';
 
@@ -32,6 +33,14 @@ export default class ReactAntEditableTagGroup extends Component {
     onChange: noop
   };
 
+  static getDerivedStateFromProps(inProps, inState) {
+    const { value } = inProps;
+    if (value !== inState.value) {
+      return { value };
+    }
+    return null;
+  }
+
   constructor(inProps) {
     super(inProps);
     const { value } = inProps;
@@ -40,35 +49,28 @@ export default class ReactAntEditableTagGroup extends Component {
     };
   }
 
-  shouldComponentUpdate(inProps) {
-    const { value } = inProps;
-    if (value !== this.state.value) {
-      this.setState({ value });
-    }
-    return true;
-  }
+  // shouldComponentUpdate(inProps) {
+  //   const { value } = inProps;
+  //   if (value !== this.state.value) {
+  //     this.setState({ value });
+  //   }
+  //   return true;
+  // }
 
   template = ({ item, index }, cb) => {
-    const { value } = this.state;
+    // TODO: tag.cloable will create ant-tag-hidden?
     return (
-      <Tag closable key={index} onClose={cb}>
+      <Tag key={index}>
         <Input
           ref={(input) => (this.input = input)}
           type="text"
           size="small"
-          defaultValue={item}
+          value={item}
           className={`${CLASS_NAME}__input`}
-          onBlur={(e) => {
-            value[value.length - 1] = e.nativeEvent.target.value;
-            this.setState({ value }, () => {
-              this.handleChange({
-                target: {
-                  value: value
-                }
-              });
-            });
-          }}
+          onChange={this.handleInputChange.bind(this, index)}
+          onBlur={this.handleInputBlur.bind(this, index)}
         />
+        <Icon type="close" onClick={cb} />
       </Tag>
     );
   };
@@ -96,15 +98,37 @@ export default class ReactAntEditableTagGroup extends Component {
     return '';
   };
 
-  handleChange = (inEvent) => {
+  handleInputChange = (inIndex, inEvent) => {
+    const { value } = this.state;
     const { onChange } = this.props;
-    onChange(inEvent);
+    value[inIndex] = inEvent.target.value;
+    const target = { value };
+    this.setState(target, () => {
+      onChange({ target });
+    });
+  };
+
+  handleInputBlur = (inIndex, inEvent) => {
+    const { value } = this.state;
+    const { onChange } = this.props;
+    const target = { value: nxUnique(value) };
+    this.setState(target, () => {
+      onChange({ target });
+    });
+  };
+
+  handleInterChange = (inEvent) => {
+    const { value } = inEvent.target;
+    const { onChange } = this.props;
+    const target = { value: nxUnique(value) };
+    this.setState(target, () => {
+      onChange({ target });
+    });
   };
 
   render() {
     const { className, value, onChange, ...props } = this.props;
     const _value = this.state.value;
-
     return (
       <ReactInteractiveList
         items={_value}
@@ -113,7 +137,9 @@ export default class ReactAntEditableTagGroup extends Component {
         templateDefault={this.templateDefault}
         data-component={CLASS_NAME}
         className={classNames(CLASS_NAME, className)}
-        {...props}></ReactInteractiveList>
+        onChange={this.handleInterChange}
+        {...props}
+      />
     );
   }
 }

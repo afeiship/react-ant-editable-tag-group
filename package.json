@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-ant-editable-tag-group",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Editable tag group for ant.",
   "main": "dist/index.js",
   "scripts": {
@@ -72,6 +72,7 @@
     "react-dom": "^16.12.0"
   },
   "dependencies": {
+    "@feizheng/next-unique": "^1.0.0",
     "@feizheng/noop": "^1.0.0",
     "@feizheng/react-interactive-list": "^1.0.1",
     "classnames": "^2.2.6",

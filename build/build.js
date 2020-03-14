@@ -17,6 +17,7 @@ export default merge(baseConfig, {
   externals: externals.base({
     '@feizheng/noop': '@feizheng/noop',
     '@feizheng/react-interactive-list': '@feizheng/react-interactive-list',
+    '@feizheng/next-unique':'@feizheng/next-unique',
     'antd':'antd'
   }),
   plugins: [plugins.clean(), plugins.copyStyles()]
