@@ -1,7 +1,7 @@
 $react-ant-editable-tag-group-options: () !default;
 
 .react-ant-editable-tag-group {
-  display: inline-block;
+  &,
   .react-list {
     display: inline-block;
   }
@@ -12,11 +12,6 @@ $react-ant-editable-tag-group-options: () !default;
     text-align: center;
   }
   &__new {
-    background: #fff;
-    height: 26px;
-    line-height: 26px;
-    border-style: dashed;
-    display: inline-flex;
-    align-items: center;
+    font-size: 12px;
   }
 }

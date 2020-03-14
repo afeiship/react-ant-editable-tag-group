@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from '@feizheng/noop';
 import objectAssign from 'object-assign';
-import { Tag, Icon, Input } from 'antd';
+import { Tag, Icon, Input, Button } from 'antd';
 import ReactInteractiveList from '@feizheng/react-interactive-list';
 
 const CLASS_NAME = 'react-ant-editable-tag-group';
@@ -81,10 +81,14 @@ export default class ReactAntEditableTagGroup extends Component {
       });
     };
     return (
-      <Tag onClick={create} className={`${CLASS_NAME}__new`}>
-        <Icon type="plus" />
+      <Button
+        size="small"
+        type="dashed"
+        icon="plus"
+        onClick={create}
+        className={`${CLASS_NAME}__new`}>
         新增
-      </Tag>
+      </Button>
     );
   };
 
