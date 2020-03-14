@@ -1,8 +1,10 @@
 $react-ant-editable-tag-group-options: () !default;
 
 .react-ant-editable-tag-group {
-  display: flex;
-  align-items: center;
+  display: inline-block;
+  .react-list {
+    display: inline-block;
+  }
   &__input {
     width: 78px;
     border-color: transparent;
