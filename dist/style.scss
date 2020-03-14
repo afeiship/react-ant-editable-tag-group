@@ -2,6 +2,7 @@ $react-ant-editable-tag-group-options: () !default;
 
 .react-ant-editable-tag-group {
   display: flex;
+  align-items: center;
   &__input {
     width: 78px;
     border-color: transparent;
@@ -10,6 +11,8 @@ $react-ant-editable-tag-group-options: () !default;
   }
   &__new {
     background: #fff;
+    height: 26px;
+    line-height: 26px;
     border-style: dashed;
     display: inline-flex;
     align-items: center;
