@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/react-ant-editable-tag-group",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Editable tag group for ant.",
   "main": "dist/index.js",
   "scripts": {

@@ -1,10 +1,12 @@
 $react-ant-editable-tag-group-options: () !default;
 
 .react-ant-editable-tag-group {
-  &,
+  display: inline-block;
+
   .react-list {
-    display: inline-block;
+    display: inline;
   }
+
   &__input {
     width: 78px;
     border-color: transparent;

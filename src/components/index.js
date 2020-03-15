@@ -49,14 +49,6 @@ export default class ReactAntEditableTagGroup extends Component {
     };
   }
 
-  // shouldComponentUpdate(inProps) {
-  //   const { value } = inProps;
-  //   if (value !== this.state.value) {
-  //     this.setState({ value });
-  //   }
-  //   return true;
-  // }
-
   template = ({ item, index }, cb) => {
     // TODO: tag.cloable will create ant-tag-hidden?
     return (
