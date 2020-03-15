@@ -24,6 +24,7 @@ class App extends React.Component {
           <button onClick={this.onRandom}>Set Random Items</button>
         </p>
         <ReactAntEditableTagGroup
+          quick
           value={items}
           onChange={(e) => {
             this.setState({ items: e.target.value });

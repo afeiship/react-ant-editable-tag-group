@@ -25,11 +25,26 @@ export default class ReactAntEditableTagGroup extends Component {
     /**
      * The change handler.
      */
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    /**
+     * The minimum tag number.
+     */
+    min: PropTypes.number,
+    /**
+     * The maximum tags number.
+     */
+    max: PropTypes.number,
+    /**
+     * If use keymap `enter` key to quick add tag.
+     */
+    quick: PropTypes.bool
   };
 
   static defaultProps = {
     value: [],
+    min: 0,
+    max: 20,
+    quick: false,
     onChange: noop
   };
 
@@ -61,6 +76,7 @@ export default class ReactAntEditableTagGroup extends Component {
           className={`${CLASS_NAME}__input`}
           onChange={this.handleInputChange.bind(this, index)}
           onBlur={this.handleInputBlur.bind(this, index)}
+          onKeyDown={this.handleInputKeyDown}
         />
         <Icon type="close" onClick={cb} />
       </Tag>
@@ -76,6 +92,7 @@ export default class ReactAntEditableTagGroup extends Component {
     };
     return (
       <Button
+        ref={(btn) => (this.btn = btn)}
         size="small"
         type="dashed"
         icon="plus"
@@ -109,6 +126,14 @@ export default class ReactAntEditableTagGroup extends Component {
     });
   };
 
+  handleInputKeyDown = (inEvent) => {
+    const { quick } = this.props;
+    if (inEvent.key === 'Enter') {
+      !quick && inEvent.preventDefault();
+      this.btn.buttonNode.focus();
+    }
+  };
+
   handleInterChange = (inEvent) => {
     const { value } = inEvent.target;
     const { onChange } = this.props;
@@ -119,10 +144,21 @@ export default class ReactAntEditableTagGroup extends Component {
   };
 
   render() {
-    const { className, value, onChange, ...props } = this.props;
+    const {
+      className,
+      value,
+      onChange,
+      min,
+      max,
+      quick,
+      ...props
+    } = this.props;
     const _value = this.state.value;
+
     return (
       <ReactInteractiveList
+        min={min}
+        max={max}
         items={_value}
         template={this.template}
         templateCreate={this.templateCreate}
