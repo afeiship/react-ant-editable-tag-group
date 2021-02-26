@@ -5,6 +5,9 @@ $react-ant-editable-tag-group-options: () !default;
 
   .react-list {
     display: inline;
+    .ant-tag{
+      margin-bottom: 5px;
+    }
   }
 
   &__input {

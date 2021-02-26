@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import noop from '@feizheng/noop';
-import objectAssign from 'object-assign';
-import { Tag, Badge, Icon, Input, Button } from 'antd';
-import ReactInteractiveList from '@feizheng/react-interactive-list';
-import nxUnique from '@feizheng/next-unique';
+import noop from '@jswork/noop';
+import { Tag, Icon, Input, Button } from 'antd';
+import ReactInteractiveList from '@jswork/react-interactive-list';
+import nxUnique from '@jswork/next-unique';
 
 const CLASS_NAME = 'react-ant-editable-tag-group';
 
@@ -37,7 +35,15 @@ export default class ReactAntEditableTagGroup extends Component {
     /**
      * If use keymap `enter` key to quick add tag.
      */
-    quick: PropTypes.bool
+    quick: PropTypes.bool,
+    /**
+     * If set readOnly.
+     */
+    readOnly: PropTypes.bool,
+    /**
+     * If set disabed.
+     */
+    disabled: PropTypes.bool
   };
 
   static defaultProps = {
@@ -66,6 +72,7 @@ export default class ReactAntEditableTagGroup extends Component {
 
   template = ({ item, index }, cb) => {
     // TODO: tag.cloable will create ant-tag-hidden?
+    const { disabled, readOnly } = this.props;
     return (
       <Tag key={index}>
         <Input
@@ -73,6 +80,8 @@ export default class ReactAntEditableTagGroup extends Component {
           type="text"
           size="small"
           value={item}
+          disabled={disabled}
+          readOnly={readOnly}
           className={`${CLASS_NAME}__input`}
           onChange={this.handleInputChange.bind(this, index)}
           onBlur={this.handleInputBlur.bind(this, index)}
@@ -171,3 +180,4 @@ export default class ReactAntEditableTagGroup extends Component {
     );
   }
 }
+

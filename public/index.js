@@ -1,6 +1,7 @@
-import ReactAntEditableTagGroup from '../src/main';
-import ReactDOM from 'react-dom';
+import ReactDemokit from '@jswork/react-demokit';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactAntEditableTagGroup from '../src/main';
 import './assets/style.scss';
 
 class App extends React.Component {
@@ -12,16 +13,17 @@ class App extends React.Component {
     const random = Math.floor(Math.random() * 10);
     const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const _items = items.slice(0, random);
-    console.log('on random:', _items);
     this.setState({ items: _items });
   };
 
   render() {
     const { items } = this.state;
     return (
-      <div className="app-container">
+      <ReactDemokit
+        className="p-3 app-container"
+        url="https://github.com/afeiship/react-ant-editable-tag-group">
         <p>
-          <button onClick={this.onRandom}>Set Random Items</button>
+          <button className="button is-primary isfullwidth" onClick={this.onRandom}>Set Random Items</button>
         </p>
         <ReactAntEditableTagGroup
           quick
@@ -30,7 +32,7 @@ class App extends React.Component {
             this.setState({ items: e.target.value });
           }}
         />
-      </div>
+      </ReactDemokit>
     );
   }
 }
