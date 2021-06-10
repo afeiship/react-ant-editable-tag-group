@@ -103,7 +103,7 @@ export default class ReactAntEditableTagGroup extends Component {
         type="dashed"
         icon="plus"
         onClick={create}
-        className={`${CLASS_NAME}__new`}>
+        className={`${CLASS_NAME}__create`}>
         新增
       </Button>
     );
