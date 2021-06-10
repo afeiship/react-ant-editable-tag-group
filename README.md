@@ -63,12 +63,13 @@ npm install -S @jswork/react-ant-editable-tag-group
           className="p-3 app-container"
           url="https://github.com/afeiship/react-ant-editable-tag-group">
           <p>
-            <button className="button is-primary isfullwidth" onClick={this.onRandom}>Set Random Items</button>
+            <button className="button is-primary is-fullwidth" onClick={this.onRandom}>Set Random Items</button>
           </p>
           <ReactAntEditableTagGroup
             quick
             value={items}
             onChange={(e) => {
+              console.log(e.target.value);
               this.setState({ items: e.target.value });
             }}
           />
