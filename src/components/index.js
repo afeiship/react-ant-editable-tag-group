@@ -5,6 +5,7 @@ import noop from '@jswork/noop';
 import { Tag, Icon, Input, Button } from 'antd';
 import ReactInteractiveList from '@jswork/react-interactive-list';
 import nxUnique from '@jswork/next-unique';
+import AutosizeInput from 'react-input-autosize';
 
 const CLASS_NAME = 'react-ant-editable-tag-group';
 
@@ -65,9 +66,7 @@ export default class ReactAntEditableTagGroup extends Component {
   constructor(inProps) {
     super(inProps);
     const { value } = inProps;
-    this.state = {
-      value
-    };
+    this.state = { value };
   }
 
   template = ({ item, index }, cb) => {
@@ -75,7 +74,7 @@ export default class ReactAntEditableTagGroup extends Component {
     const { disabled, readOnly } = this.props;
     return (
       <Tag key={index}>
-        <Input
+        <AutosizeInput
           ref={(input) => (this.input = input)}
           type="text"
           size="small"
@@ -95,9 +94,7 @@ export default class ReactAntEditableTagGroup extends Component {
   templateCreate = ({ value }, cb) => {
     const create = () => {
       cb();
-      setTimeout(() => {
-        this.input.focus();
-      });
+      setTimeout(() => this.input.focus());
     };
     return (
       <Button
@@ -153,15 +150,7 @@ export default class ReactAntEditableTagGroup extends Component {
   };
 
   render() {
-    const {
-      className,
-      value,
-      onChange,
-      min,
-      max,
-      quick,
-      ...props
-    } = this.props;
+    const { className, value, onChange, min, max, quick, ...props } = this.props;
     const _value = this.state.value;
 
     return (
@@ -180,4 +169,3 @@ export default class ReactAntEditableTagGroup extends Component {
     );
   }
 }
-

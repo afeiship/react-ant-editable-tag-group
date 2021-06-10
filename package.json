@@ -87,7 +87,8 @@
     "@jswork/next-unique": "^1.0.0",
     "@jswork/noop": "^1.0.0",
     "@jswork/react-interactive-list": "^1.0.1",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "react-input-autosize": "^3.0.0"
   },
   "publishConfig": {
     "access": "public",

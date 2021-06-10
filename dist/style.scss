@@ -5,16 +5,17 @@ $react-ant-editable-tag-group-options: () !default;
 
   .react-list {
     display: inline;
-    .ant-tag{
+    .ant-tag {
       margin-bottom: 5px;
     }
   }
 
   &__input {
-    width: 78px;
-    border-color: transparent;
-    background: none;
-    text-align: center;
+    input {
+      border-color: transparent;
+      background: none;
+      text-align: center;
+    }
   }
   &__new {
     font-size: 12px;
