@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import noop from '@jswork/noop';
-import { Tag, Icon, Input, Button } from 'antd';
+import { Tag, Button } from 'antd';
 import ReactInteractiveList from '@jswork/react-interactive-list';
 import nxUnique from '@jswork/next-unique';
 import AutosizeInput from 'react-input-autosize';
@@ -86,12 +86,12 @@ export default class ReactAntEditableTagGroup extends Component {
           onBlur={this.handleInputBlur.bind(this, index)}
           onKeyDown={this.handleInputKeyDown}
         />
-        <Icon type="close" onClick={cb} />
+        <i className={`${CLASS_NAME}__close`} onClick={cb}></i>
       </Tag>
     );
   };
 
-  templateCreate = ({ value }, cb) => {
+  templateCreate = (_, cb) => {
     const create = () => {
       cb();
       setTimeout(() => this.input.focus());
@@ -101,9 +101,9 @@ export default class ReactAntEditableTagGroup extends Component {
         ref={(btn) => (this.btn = btn)}
         size="small"
         type="dashed"
-        icon="plus"
         onClick={create}
         className={`${CLASS_NAME}__create`}>
+        <i className={`${CLASS_NAME}__plus`}></i>
         新增
       </Button>
     );
@@ -123,7 +123,7 @@ export default class ReactAntEditableTagGroup extends Component {
     });
   };
 
-  handleInputBlur = (inIndex, inEvent) => {
+  handleInputBlur = () => {
     const { value } = this.state;
     const { onChange } = this.props;
     const target = { value: nxUnique(value) };

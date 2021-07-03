@@ -8,7 +8,7 @@
 
 ## installation
 ```shell
-npm install -S antd@3
+npm install -S antd
 npm install -S @jswork/react-ant-editable-tag-group
 ```
 

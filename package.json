@@ -86,7 +86,7 @@
   "dependencies": {
     "@jswork/next-unique": "^1.0.0",
     "@jswork/noop": "^1.0.0",
-    "@jswork/react-interactive-list": "^1.0.1",
+    "@jswork/react-interactive-list": "^1.1.0",
     "classnames": "^2.2.6",
     "react-input-autosize": "^3.0.0"
   },
