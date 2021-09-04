@@ -136,7 +136,8 @@ export default class ReactAntEditableTagGroup extends Component {
     const { quick } = this.props;
     if (inEvent.key === 'Enter') {
       !quick && inEvent.preventDefault();
-      this.btn.buttonNode.focus();
+      const dom = this.btn.buttonNode || this.btn;
+      dom.focus();
     }
   };
 

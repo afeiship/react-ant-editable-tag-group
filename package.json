@@ -59,7 +59,7 @@
     "@jswork/react-markdown-props": "^1.0.1",
     "@jswork/webpack-lib-kits": "^1.0.2",
     "@testing-library/react": "^11.0.4",
-    "antd": "^3.26.20",
+    "antd": "^4.16.13",
     "autoprefixer": "^10.0.1",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
