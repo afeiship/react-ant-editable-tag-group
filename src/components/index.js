@@ -126,7 +126,8 @@ export default class ReactAntEditableTagGroup extends Component {
   handleInputBlur = () => {
     const { value } = this.state;
     const { onChange } = this.props;
-    const target = { value: nxUnique(value) };
+    const _value = value.filter(Boolean);
+    const target = { value: nxUnique(_value) };
     this.setState(target, () => {
       onChange({ target });
     });
