@@ -126,7 +126,7 @@ export default class ReactAntEditableTagGroup extends Component {
   handleInputBlur = () => {
     const { value } = this.state;
     const { onChange } = this.props;
-    const _value = value.filter(Boolean);
+    const _value = value.filter(Boolean).map((item) => item.trim());
     const target = { value: nxUnique(_value) };
     this.setState(target, () => {
       onChange({ target });
@@ -135,6 +135,7 @@ export default class ReactAntEditableTagGroup extends Component {
 
   handleInputKeyDown = (inEvent) => {
     const { quick } = this.props;
+    console.log('inEvent.key:', inEvent.key);
     if (inEvent.key === 'Enter') {
       !quick && inEvent.preventDefault();
       const dom = this.btn.buttonNode || this.btn;
