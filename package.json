@@ -1,6 +1,6 @@
 {
   "name": "@jswork/react-ant-editable-tag-group",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Editable tag group for ant.",
   "main": "dist/index.js",
   "scripts": {
